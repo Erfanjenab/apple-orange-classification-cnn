@@ -1,0 +1,662 @@
+/* ---------------- تنظیمات پایه و رنگ‌ها ---------------- */
+:root {
+    --bg: #070d20;
+    --panel: rgba(17, 27, 59, 0.78);
+    --panel-deep: #0b142e;
+    --blue: #4d83ff;
+    --blue-light: #65a7ff;
+    --text: #f5f7ff;
+    --muted: #a7b7e5;
+    --apple: #ff4058;
+    --orange: #ffa51f;
+    --green: #31e0b0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--text);
+    font-family: "Inter", Arial, sans-serif;
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(38, 57, 145, .28), transparent 42%),
+        linear-gradient(135deg, #080e22 0%, #0b1230 55%, #070c1e 100%);
+}
+
+/* نورهای محو پس‌زمینه */
+.ambient {
+    position: fixed;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    filter: blur(110px);
+    opacity: .16;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.ambient-one {
+    top: -150px;
+    right: -100px;
+    background: #315dff;
+}
+
+.ambient-two {
+    bottom: -180px;
+    left: -120px;
+    background: #ff375e;
+}
+
+/* شکل‌های تزئینی میوه در گوشه‌ها */
+.fruit-decoration {
+    position: fixed;
+    z-index: -1;
+    pointer-events: none;
+    opacity: .08;
+    font-size: 260px;
+    line-height: 1;
+}
+
+.apple-decoration {
+    left: -95px;
+    top: 100px;
+    color: #b83e91;
+}
+
+.orange-decoration {
+    right: -100px;
+    top: 160px;
+    color: #ff8b23;
+}
+
+.page-shell {
+    width: min(100% - 40px, 1080px);
+    margin: 0 auto;
+    padding: 55px 0 34px;
+}
+
+/* ---------------- هدر ---------------- */
+.hero {
+    text-align: center;
+}
+
+.brand-icon {
+    position: relative;
+    width: 150px;
+    height: 135px;
+    margin: 0 auto 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+}
+
+.brand-apple,
+.brand-orange {
+    font-size: 92px;
+    line-height: 1;
+    text-shadow: 0 10px 28px rgba(0,0,0,.3);
+}
+
+.brand-apple {
+    color: #ff3657;
+    transform: translateX(8px);
+}
+
+.brand-orange {
+    color: #ff9e1b;
+    transform: translateX(-8px);
+}
+
+.brand-leaf {
+    position: absolute;
+    width: 28px;
+    height: 17px;
+    top: 13px;
+    left: 69px;
+    border-radius: 100% 0 100% 0;
+    background: #20d78a;
+    transform: rotate(-22deg);
+}
+
+.scan-corner {
+    position: absolute;
+    width: 27px;
+    height: 27px;
+    border-color: var(--blue-light);
+    border-style: solid;
+}
+
+.corner-tl { top: 8px; left: 4px; border-width: 5px 0 0 5px; border-radius: 10px 0 0; }
+.corner-tr { top: 8px; right: 4px; border-width: 5px 5px 0 0; border-radius: 0 10px 0 0; }
+.corner-bl { bottom: 7px; left: 4px; border-width: 0 0 5px 5px; border-radius: 0 0 0 10px; }
+.corner-br { bottom: 7px; right: 4px; border-width: 0 5px 5px 0; border-radius: 0 0 10px; }
+
+.hero h1 {
+    margin: 0;
+    font-size: clamp(42px, 7vw, 68px);
+    font-weight: 800;
+    letter-spacing: -2.5px;
+}
+
+.hero h1 span {
+    color: #5794ff;
+    background: linear-gradient(90deg, #4384ff, #60a9ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    margin: 12px 0 38px;
+    color: var(--muted);
+    font-size: clamp(17px, 3vw, 25px);
+}
+
+.intro-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    margin: 0 auto 32px;
+    max-width: 720px;
+}
+
+.intro-line > span {
+    height: 1px;
+    flex: 1;
+    background: linear-gradient(90deg, transparent, #263d80);
+}
+
+.intro-line > span:last-child {
+    background: linear-gradient(90deg, #263d80, transparent);
+}
+
+.intro-line p {
+    color: var(--muted);
+    font-size: 20px;
+    line-height: 1.6;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.apple-text { color: var(--apple); }
+.orange-text { color: var(--orange); }
+
+/* ---------------- باکس آپلود ---------------- */
+.upload-card {
+    min-height: 285px;
+    border: 2px dashed #4e7eff;
+    border-radius: 30px;
+    background: rgba(20, 32, 69, .43);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+    cursor: pointer;
+    transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.upload-card:hover,
+.upload-card.drag-over {
+    background: rgba(39, 60, 119, .32);
+    border-color: #83a7ff;
+}
+
+.upload-card.drag-over {
+    transform: scale(1.01);
+}
+
+.upload-content {
+    text-align: center;
+}
+
+.upload-icon {
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 12px;
+    color: #628bff;
+}
+
+.upload-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.upload-content h2 {
+    margin: 0 0 12px;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.upload-content p {
+    margin: 0 0 15px;
+    color: var(--muted);
+    font-size: 21px;
+}
+
+.browse-button {
+    padding: 0;
+    border: 0;
+    color: #4c9bff;
+    background: transparent;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.browse-button:hover,
+.text-button:hover {
+    color: #91bdff;
+}
+
+.upload-content small {
+    color: var(--muted);
+    font-size: 17px;
+}
+
+.preview-content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+}
+
+.preview-content img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 18px;
+    background: #e9edf8;
+}
+
+.preview-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    color: var(--muted);
+}
+
+.preview-info strong {
+    color: var(--text);
+    max-width: 300px;
+    overflow-wrap: anywhere;
+}
+
+.text-button {
+    border: 0;
+    padding: 0;
+    margin-top: 5px;
+    color: var(--blue-light);
+    background: transparent;
+    cursor: pointer;
+    font: inherit;
+}
+
+/* ---------------- کارت نتیجه ---------------- */
+.result-card {
+    margin-top: 34px;
+    padding: 24px;
+    border: 1px solid rgba(82, 116, 220, .25);
+    border-radius: 32px;
+    background: linear-gradient(145deg, rgba(24, 37, 79, .92), rgba(12, 20, 47, .94));
+    box-shadow: 0 20px 55px rgba(0,0,0,.2), inset 0 0 0 1px rgba(92, 126, 232, .1);
+}
+
+.result-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 0 8px 20px;
+}
+
+.result-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.result-title h2 {
+    margin: 0;
+    font-size: 27px;
+}
+
+.success-icon {
+    width: 45px;
+    height: 45px;
+    display: grid;
+    place-items: center;
+    color: #062c2a;
+    background: var(--green);
+    border: 4px solid rgba(255,255,255,.16);
+    border-radius: 50%;
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.done-badge {
+    color: #35e5b5;
+    background: rgba(27, 197, 148, .17);
+    border: 1px solid rgba(27, 197, 148, .55);
+    border-radius: 24px;
+    padding: 8px 18px;
+    font-weight: 700;
+}
+
+.result-body {
+    display: grid;
+    grid-template-columns: minmax(220px, 36%) 1fr;
+    gap: 35px;
+    align-items: center;
+    padding: 18px;
+    border-radius: 26px;
+    background: rgba(5, 12, 31, .48);
+}
+
+.result-image-wrap {
+    height: 300px;
+    overflow: hidden;
+    border-radius: 22px;
+    background: #e8eaf2;
+}
+
+.result-image-wrap img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.result-details h3 {
+    margin: 0 0 10px;
+    color: var(--apple);
+    font-size: clamp(38px, 5vw, 58px);
+    font-weight: 800;
+}
+
+.result-details h3.orange-result {
+    color: var(--orange);
+}
+
+.confidence {
+    margin: 0 0 28px;
+    color: var(--muted);
+    font-size: 24px;
+}
+
+.confidence strong {
+    color: var(--text);
+    font-size: 34px;
+    margin-left: 5px;
+}
+
+.probability-row {
+    margin-top: 20px;
+}
+
+.probability-label {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 9px;
+    font-size: 18px;
+}
+
+.probability-label strong {
+    font-size: 18px;
+}
+
+.progress-track {
+    height: 15px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #202b4d;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    transition: width .65s ease;
+}
+
+.apple-fill {
+    background: linear-gradient(90deg, #ff405c, #ff5265);
+}
+
+.orange-fill {
+    background: linear-gradient(90deg, #ff9c00, #ffbd20);
+}
+
+/* ---------------- دکمه تلاش مجدد ---------------- */
+.try-again-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: min(440px, 100%);
+    min-height: 70px;
+    margin: 34px auto 0;
+    border: 3px solid #4d83ff;
+    border-radius: 50px;
+    color: var(--text);
+    background: transparent;
+    font: inherit;
+    font-size: 21px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .2s ease, transform .2s ease;
+}
+
+.try-again-button:hover {
+    background: rgba(77, 131, 255, .14);
+    transform: translateY(-2px);
+}
+
+.try-again-button span {
+    font-size: 30px;
+}
+
+/* ---------------- وضعیت بارگذاری و خطا ---------------- */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 25px;
+    color: var(--muted);
+}
+
+.spinner {
+    width: 23px;
+    height: 23px;
+    border: 3px solid rgba(103, 145, 255, .25);
+    border-top-color: #6c9aff;
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.status-message {
+    margin-top: 16px;
+    padding: 13px 17px;
+    border: 1px solid rgba(255, 90, 110, .4);
+    border-radius: 12px;
+    color: #ff9daa;
+    background: rgba(255, 60, 90, .08);
+    text-align: center;
+}
+
+/* ---------------- فوتر ---------------- */
+.footer {
+    margin-top: 40px;
+    text-align: center;
+    color: var(--muted);
+}
+
+.footer-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+}
+
+.footer-divider span {
+    width: min(28%, 260px);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #263d80);
+}
+
+.footer-divider span:last-child {
+    background: linear-gradient(90deg, #263d80, transparent);
+}
+
+.robot-icon {
+    color: #43aaff;
+    font-size: 30px;
+}
+
+.footer p {
+    margin: 8px 0 0;
+    font-size: 17px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ---------------- سازگاری با موبایل ---------------- */
+@media (max-width: 700px) {
+    .page-shell {
+        width: min(100% - 28px, 540px);
+        padding-top: 30px;
+    }
+
+    .brand-icon {
+        transform: scale(.78);
+        margin-bottom: 0;
+    }
+
+    .hero h1 {
+        letter-spacing: -1.5px;
+    }
+
+    .subtitle {
+        margin-bottom: 25px;
+    }
+
+    .intro-line {
+        gap: 10px;
+        margin-bottom: 22px;
+    }
+
+    .intro-line p {
+        font-size: 15px;
+    }
+
+    .upload-card {
+        min-height: 230px;
+        padding: 20px 12px;
+        border-radius: 22px;
+    }
+
+    .upload-icon {
+        width: 62px;
+        height: 62px;
+    }
+
+    .upload-content h2 {
+        font-size: 23px;
+    }
+
+    .upload-content p {
+        font-size: 16px;
+    }
+
+    .upload-content small {
+        font-size: 13px;
+    }
+
+    .result-card {
+        padding: 14px;
+        border-radius: 23px;
+    }
+
+    .result-heading {
+        margin: 0 2px 15px;
+    }
+
+    .result-title {
+        gap: 9px;
+    }
+
+    .result-title h2 {
+        font-size: 18px;
+    }
+
+    .success-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 19px;
+    }
+
+    .done-badge {
+        padding: 6px 11px;
+        font-size: 12px;
+    }
+
+    .result-body {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 12px;
+    }
+
+    .result-image-wrap {
+        height: 240px;
+    }
+
+    .result-details h3 {
+        font-size: 42px;
+    }
+
+    .confidence {
+        font-size: 17px;
+        margin-bottom: 20px;
+    }
+
+    .confidence strong {
+        font-size: 25px;
+    }
+
+    .probability-label {
+        font-size: 15px;
+    }
+
+    .probability-label strong {
+        font-size: 15px;
+    }
+
+    .try-again-button {
+        min-height: 58px;
+        font-size: 16px;
+        margin-top: 23px;
+    }
+
+    .footer {
+        margin-top: 30px;
+    }
+}
